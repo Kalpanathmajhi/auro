@@ -29,20 +29,17 @@ const RootLayout = () => {
   }
 
   return (
+    //to hide white top from top 
     <Stack>
       <Stack.Screen name='index' options={{ headerShown:false}} />
+      <Stack.Screen name='(auth)' options={{ headerShown:false}} />
+      <Stack.Screen name='(tabs)' options={{ headerShown:false}} />
+      {/* <Stack.Screen name='/search/[query]' options={{ headerShown:false}} /> */}
     </Stack>
+    
   )
 }
 
-const styles = StyleSheet.create({
 
-  container: {
-    display: "flex",
-    flex:1,
-    alignItems: 'center',
-    justifyContent:"center"
-  }
-})
 
 export default RootLayout
