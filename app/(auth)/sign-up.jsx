@@ -4,29 +4,33 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { images } from "../../constants"
 import FormField from '../../components/FormField'
 import CustomButton from "../../components/CustomButton"
-import {Link} from "expo-router"
+import {Link, router} from "expo-router"
 import { createUser } from '../../lib/appwrite'
 const Signup = () => {
   const [form, setForm] = useState({
     username: '',
     email: '',
     password: ''
-  })
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const submit =async () => {
-    if(!form.username || !form.email || !form.password){
-      Alert.alert("Error Please fill in all the fields")
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const submit = async () => {
+    if (!form.username || !form.email || !form.password) {
+      Alert.alert("Error", "Please fill in all the fields");
     }
+
     setIsSubmitting(true);
     try {
-      const result = await createUser()
+      const result = await createUser(form.email, form.password, form.username);
+      // Assuming router is correctly set up to handle navigation
+      router.replace('/home');
     } catch (error) {
-      Alert.alert(Error,"error message")
-    } finally{
+      // Properly handling and displaying the error message
+      Alert.alert("Error", error.message || "An unexpected error occurred");
+    } finally {
       setIsSubmitting(false);
     }
-    createUser();
-  }
+  };
   return (
     <SafeAreaView className="bg-primary h-full">
       <ScrollView>
@@ -39,10 +43,10 @@ const Signup = () => {
             Sign Up to Aora
           </Text>
           <FormField
-            title='UserName'
-            value={form.useerName}
+            title='User Name'
+            value={form.username}
             handleChangeText={(e) => setForm({
-              ...form, useerName: e
+              ...form, username: e
             })}
             otherStyles='mt-10'
           />
