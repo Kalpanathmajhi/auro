@@ -19,7 +19,7 @@ const SignIn = () => {
       <ScrollView>
         <View className="w-full justify-center min-h-[83vh] px-4 my-6">
           <Image source={images.logo}
-            resizeMode='conatin'
+            resizeMode='contain'
             className='w-[115px] h-[35px]'
           />
           <Text className='text-2xl text-white text-semibold mt-10 font-psemibold'>
@@ -32,7 +32,7 @@ const SignIn = () => {
               ...form, email: e
             })}
             otherStyles='mt-7'
-            keyboardTypes="email-address"
+            keyboardType="email-address"
           />
           <FormField
             title='Password'

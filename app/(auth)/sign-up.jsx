@@ -7,13 +7,12 @@ import CustomButton from "../../components/CustomButton"
 import {Link, router} from "expo-router"
 import { createUser } from '../../lib/appwrite'
 const Signup = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [form, setForm] = useState({
     username: '',
     email: '',
     password: ''
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
   const submit = async () => {
     if (!form.username || !form.email || !form.password) {
       Alert.alert("Error", "Please fill in all the fields");
@@ -23,7 +22,7 @@ const Signup = () => {
     try {
       const result = await createUser(form.email, form.password, form.username);
       // Assuming router is correctly set up to handle navigation
-      router.replace('/home');
+      router.replace("/home");
     } catch (error) {
       // Properly handling and displaying the error message
       Alert.alert("Error", error.message || "An unexpected error occurred");
@@ -36,7 +35,7 @@ const Signup = () => {
       <ScrollView>
         <View className="w-full justify-center min-h-[83vh] px-4 my-6">
           <Image source={images.logo}
-            resizeMode='conatin'
+            resizeMode='contain'
             className='w-[115px] h-[35px]'
           />
           <Text className='text-2xl text-white text-semibold mt-10 font-psemibold'>
@@ -57,7 +56,7 @@ const Signup = () => {
               ...form, email: e
             })}
             otherStyles='mt-7'
-            keyboardTypes="email-address"
+            keyboardType="email-address"
           />
           <FormField
             title='Password'
